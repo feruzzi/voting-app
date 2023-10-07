@@ -1,8 +1,16 @@
+import SignInForm from "@/components/SignInForm";
+
 const Login = () => {
   return (
-    <div className="flex flex-col items-center">
-      <h1>Login</h1>
-      <h2>Hello World</h2>
+    <div className="bg-base-100 flex flex-col items-center">
+      <div className="card card-bordered w-96 bg-base-100 shadow-xl">
+        <div className="card-body">
+          <h2 className="card-title">Sign-Up</h2>
+          <p>This Sign-Up Page</p>
+          <div className="divider"></div>
+          <SignInForm />
+        </div>
+      </div>
     </div>
   );
 };
