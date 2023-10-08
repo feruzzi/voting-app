@@ -14,7 +14,7 @@ const Navbar = async () => {
         </Link>
       </div>
       <div className="flex-none">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 z-50">
           {session?.user ? (
             <li>
               <details>

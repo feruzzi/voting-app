@@ -5,6 +5,7 @@ const SignedNav = () => {
   return (
     <>
       <li>
+        <Link href="/dashboard">Dashboard</Link>
         <Link href="#">Settings</Link>
         <button
           className="btn btn-outline btn-error btn-sm"
