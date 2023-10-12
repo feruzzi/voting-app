@@ -24,6 +24,7 @@ model User {
 model Question {
   id          Int        @id @default(autoincrement())
   question    String
+  q_title     String
   q_code      String     @unique
   q_password  String?
   q_status    String
