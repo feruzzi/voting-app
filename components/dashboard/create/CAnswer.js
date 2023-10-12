@@ -14,7 +14,16 @@ const CAnswer = (props) => {
   }, [aForm, img]);
   const handleImgChange = (e) => {
     e.preventDefault();
-    setImg(URL.createObjectURL(e.target.files[0]));
+    // setImg(URL.createObjectURL(e.target.files[0]));
+    const reader = new FileReader();
+    const image = reader.readAsDataURL(
+      e.target.files[0] || e.dataTransfer.files[0]
+    );
+    reader.onloadend = function () {
+      var base64data = reader.result;
+      console.log(base64data);
+      setImg(base64data);
+    };
     console.log(img);
     return () => URL.revokeObjectURL(objectUrl);
   };

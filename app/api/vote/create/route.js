@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
+import { uploadImage } from "@/lib/uploader";
 
 export async function POST(request) {
   const body = await request.json();
@@ -27,13 +28,15 @@ export async function POST(request) {
   }
   //answer insert
   let d_answer = [];
-  answer.map((e) => {
+  const q_public_id = "question-" + code;
+  answer.map(async (e, i) => {
     d_answer.push({
       answer: e.val.aForm.answer,
-      a_image: e.val.aForm.a_image,
+      a_image: await uploadImage(e.val.aForm.a_image, q_public_id + "-" + i),
       a_updatedAt: now,
     });
   });
+  const q_img = await uploadImage(question.qForm.q_image, q_public_id);
   const storeQuestion = await db.question.create({
     data: {
       q_title: question.qForm.q_title,
@@ -41,7 +44,7 @@ export async function POST(request) {
       q_code: code,
       q_password: question.qForm.q_password,
       q_status: "1",
-      q_image: question.qForm.q_image,
+      q_image: q_img,
       authorId: session.user.id,
       q_endAt: q_endAt,
       q_updatedAt: now,

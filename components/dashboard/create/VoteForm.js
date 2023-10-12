@@ -49,6 +49,22 @@ const VoteForm = () => {
     }
     return arr;
   };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     setIsLoading(true);
+  //     console.log(qData);
+  //     const response = await axios.post("../api/vote/create", {
+  //       question: qData,
+  //       answer: aData,
+  //     });
+  //     setIsLoading(false);
+  //     console.log({ response });
+  //     router.push("/dashboard");
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

@@ -14,8 +14,17 @@ const CQuestion = (props) => {
   });
   const handleImgChange = (e) => {
     e.preventDefault();
-    setImg(URL.createObjectURL(e.target.files[0]));
-    return () => URL.revokeObjectURL(objectUrl);
+    const reader = new FileReader();
+    // const blob = URL.createObjectURL(e.target.files[0]);
+    const image = reader.readAsDataURL(
+      e.target.files[0] || e.dataTransfer.files[0]
+    );
+    reader.onloadend = function () {
+      var base64data = reader.result;
+      console.log(base64data);
+      setImg(base64data);
+    };
+    return () => URL.revokeObjectURL(image);
     console.log(img);
   };
   const handleCheckPrivate = (e) => {
