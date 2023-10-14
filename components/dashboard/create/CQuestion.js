@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 const CQuestion = (props) => {
   const [img, setImg] = useState(null);
-  const [isPrivate, setPrivate] = useState(false);
+  const [isPrivate, setPrivate] = useState(true);
   const [qForm, setQForm] = useState({
     question: null,
     q_title: null,
@@ -29,10 +29,10 @@ const CQuestion = (props) => {
   };
   const handleCheckPrivate = (e) => {
     if (e.target.checked) {
-      setPrivate(true);
+      setPrivate(false);
       setQForm({ ...qForm, q_password: null });
     } else {
-      setPrivate(false);
+      setPrivate(true);
     }
   };
   useEffect(() => {
