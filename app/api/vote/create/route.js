@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { uploadImage } from "@/lib/uploader";
+import { hash } from "bcrypt";
 
 export async function POST(request) {
   const body = await request.json();
@@ -37,12 +38,13 @@ export async function POST(request) {
     });
   });
   const q_img = await uploadImage(question.qForm.q_image, q_public_id);
+  const hashPassword = await hash(question.qForm.q_password, 10);
   const storeQuestion = await db.question.create({
     data: {
       q_title: question.qForm.q_title,
       question: question.qForm.question,
       q_code: code,
-      q_password: question.qForm.q_password,
+      q_password: hashPassword,
       q_status: "1",
       q_image: q_img,
       authorId: session.user.id,
