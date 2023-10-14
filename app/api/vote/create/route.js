@@ -38,14 +38,22 @@ export async function POST(request) {
     });
   });
   const q_img = await uploadImage(question.qForm.q_image, q_public_id);
-  const hashPassword = await hash(question.qForm.q_password, 10);
+  let hashPassword;
+  let status;
+  if (question.qForm.q_password != null) {
+    hashPassword = await hash(question.qForm.q_password, 10);
+    status = "1";
+  } else {
+    hashPassword = null;
+    status = "2";
+  }
   const storeQuestion = await db.question.create({
     data: {
       q_title: question.qForm.q_title,
       question: question.qForm.question,
       q_code: code,
       q_password: hashPassword,
-      q_status: "1",
+      q_status: status,
       q_image: q_img,
       authorId: session.user.id,
       q_endAt: q_endAt,

@@ -27,7 +27,7 @@ model Question {
   q_title     String
   q_code      String     @unique
   q_password  String?
-  q_status    String
+  q_status    String //0:ended 1:Private 2:Public
   q_image     String?
   author      User       @relation(fields: [authorId], references: [id])
   authorId    Int
