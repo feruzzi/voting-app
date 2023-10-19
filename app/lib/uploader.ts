@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import cloudinary from "@/lib/cloudinary";
-export function uploadImage(img, title) {
+export async function uploadImage(img, title) {
   try {
     if(img==null){
       return null
     }
-    return new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
       cloudinary.v2.uploader.upload(
         img,
         { public_id: title },
