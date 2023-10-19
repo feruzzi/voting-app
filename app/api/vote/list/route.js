@@ -5,7 +5,9 @@ export async function GET() {
   try {
     const questions = await db.question.findMany({
       where: {
-        q_status: "1",
+        NOT: {
+          q_status: "0",
+        },
       },
     });
     return NextResponse.json(
