@@ -44,7 +44,7 @@ const VoteCard = () => {
                 <h2 className="card-title">
                   {q.q_title}
                   <div className="badge badge-secondary">
-                    {q.q_status == 1 ? "Public" : "Private"}
+                    {q.q_status == 1 ? "Private" : "Public"}
                   </div>
                 </h2>
                 <p>{q.question}</p>
