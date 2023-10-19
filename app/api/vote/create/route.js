@@ -30,13 +30,18 @@ export async function POST(request) {
   //answer insert
   let d_answer = [];
   const q_public_id = "question-" + code;
-  answer.map(async (e, i) => {
+  const promises = answer.map(async (e, i) => {
     d_answer.push({
       answer: e.val.aForm.answer,
       a_image: await uploadImage(e.val.aForm.a_image, q_public_id + "-" + i),
       a_updatedAt: now,
     });
   });
+  try {
+    const d_answer = await Promise.all(promises);
+  } catch (error) {
+    return NextResponse.json({ success: false, body: error });
+  }
   const q_img = await uploadImage(question.qForm.q_image, q_public_id);
   let hashPassword;
   let status;
